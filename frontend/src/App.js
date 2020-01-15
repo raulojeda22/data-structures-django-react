@@ -13,29 +13,26 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <h1>
-            Restaurante Handkerchief
+            Data structures
           </h1>
-          <nav>
-            <ul id="nav">
-              <li><Link to="/">Home</Link></li>
-              <li><Link to="/carta">Carta</Link></li>
-              <li><Link to="/estrella">Plato estrella</Link></li>
-            </ul>
-          </nav>
-          <div id="content">
-            <Switch>
-              <Route exact path="/">
-                <h2>Bienvenido!</h2>
-                <p>Desea ver <Link to="/carta">la carta?</Link></p>
-              </Route>
-              <Route exact path="/carta" component={Carta}></Route>
-              <Route exact path="/estrella" component={Estrella}></Route>
-              <Route exact path="/carta/:menu" component={Carta}></Route>
-              <Route exact path="/item/:category/:item" component={Item}></Route>
-              <Route component={Nothing}/>
-            </Switch>
-          </div>
+          <ul id="nav">
+            <li><h2><Link to="/">Home</Link></h2></li>
+            <li><h2><Link to="/login">Login</Link></h2></li>
+          </ul>
         </header>
+        
+        <div id="content">
+          <Switch>
+            <Route exact path="/">
+              <h2>Home</h2>
+            </Route>
+            <Route exact path="/carta" component={Carta}></Route>
+            <Route exact path="/estrella" component={Estrella}></Route>
+            <Route exact path="/carta/:menu" component={Carta}></Route>
+            <Route exact path="/item/:category/:item" component={Item}></Route>
+            <Route component={Nothing}/>
+          </Switch>
+        </div>
       </div>
     );
   }

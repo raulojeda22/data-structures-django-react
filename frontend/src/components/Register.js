@@ -10,9 +10,8 @@ class Register extends React.Component {
 
         this.state = {
             user: {
-                firstName: '',
-                lastName: '',
                 username: '',
+                email: '',
                 password: ''
             },
             submitted: false
@@ -38,7 +37,7 @@ class Register extends React.Component {
 
         this.setState({ submitted: true });
         const { user } = this.state;
-        if (user.firstName && user.lastName && user.username && user.password) {
+        if (user.username && user.email  && user.password) {
             this.props.register(user);
         }
     }
@@ -55,6 +54,13 @@ class Register extends React.Component {
                         <input type="text" name="username" value={user.username} onChange={this.handleChange} />
                         {submitted && !user.username &&
                             <div>Username is required</div>
+                        }
+                    </div>
+                    <div>
+                        <label htmlFor="email">Email</label>
+                        <input type="text" name="email" value={user.email} onChange={this.handleChange} />
+                        {submitted && !user.email &&
+                            <div>Email is required</div>
                         }
                     </div>
                     <div>

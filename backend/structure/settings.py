@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+    'docker',
     'corsheaders',
     'django_extensions',
     'rest_framework',
@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'structure.apps.core',
     'structure.apps.profiles',
     'structure.apps.posts',
+    'structure.apps.dockerapi',
 ]
 
 MIDDLEWARE = [

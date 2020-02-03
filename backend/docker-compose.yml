@@ -9,6 +9,7 @@ services:
     #command: sh -c 'python manage.py runserver 0.0.0.0:8000'
     volumes:
       - .:/code
+      - /var/run/docker.sock:/var/run/docker.sock
     ports:
       - "8000:8000"
     depends_on:

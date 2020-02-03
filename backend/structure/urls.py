@@ -23,4 +23,5 @@ urlpatterns = [
     url('api/', include('structure.apps.algorithms.urls')),
     url('api/', include('structure.apps.authentication.urls')),
     url('api/', include('structure.apps.profiles.urls')),
+    url('api/', include('structure.apps.dockerapi.urls')),
 ]

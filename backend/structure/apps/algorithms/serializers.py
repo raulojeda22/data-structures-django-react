@@ -2,11 +2,10 @@ from rest_framework import serializers
 
 from structure.apps.profiles.serializers import ProfileSerializer
 
-from .models import Article, Comment, Tag
-from .relations import TagRelatedField
+from .models import Algorithm
 
 
-class ArticleSerializer(serializers.ModelSerializer):
+class AlgorithmSerializer(serializers.ModelSerializer):
     author = ProfileSerializer(read_only=True)
     description = serializers.CharField(required=False)
     slug = serializers.SlugField(required=False)
@@ -15,8 +14,6 @@ class ArticleSerializer(serializers.ModelSerializer):
     favoritesCount = serializers.SerializerMethodField(
         method_name='get_favorites_count'
     )
-
-    tagList = TagRelatedField(many=True, required=False, source='tags')
 
     # Django REST Framework makes it possible to create a read-only field that
     # gets it's value by calling a function. In this case, the client expects
@@ -27,7 +24,7 @@ class ArticleSerializer(serializers.ModelSerializer):
     updatedAt = serializers.SerializerMethodField(method_name='get_updated_at')
 
     class Meta:
-        model = Article
+        model = Algorithm
         fields = (
             'author',
             'body',
@@ -36,7 +33,6 @@ class ArticleSerializer(serializers.ModelSerializer):
             'favorited',
             'favoritesCount',
             'slug',
-            'tagList',
             'title',
             'updatedAt',
         )
@@ -44,14 +40,9 @@ class ArticleSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         author = self.context.get('author', None)
 
-        tags = validated_data.pop('tags', [])
+        algorithm = Algorithm.objects.create(author=author, **validated_data)
 
-        article = Article.objects.create(author=author, **validated_data)
-
-        for tag in tags:
-            article.tags.add(tag)
-
-        return article
+        return algorithm
 
     def get_created_at(self, instance):
         return instance.created_at.isoformat()
@@ -73,43 +64,3 @@ class ArticleSerializer(serializers.ModelSerializer):
 
     def get_updated_at(self, instance):
         return instance.updated_at.isoformat()
-
-
-class CommentSerializer(serializers.ModelSerializer):
-    author = ProfileSerializer(required=False)
-
-    createdAt = serializers.SerializerMethodField(method_name='get_created_at')
-    updatedAt = serializers.SerializerMethodField(method_name='get_updated_at')
-
-    class Meta:
-        model = Comment
-        fields = (
-            'id',
-            'author',
-            'body',
-            'createdAt',
-            'updatedAt',
-        )
-
-    def create(self, validated_data):
-        article = self.context['article']
-        author = self.context['author']
-
-        return Comment.objects.create(
-            author=author, article=article, **validated_data
-        )
-
-    def get_created_at(self, instance):
-        return instance.created_at.isoformat()
-
-    def get_updated_at(self, instance):
-        return instance.updated_at.isoformat()
-
-
-class TagSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Tag
-        fields = ('tag',)
-
-    def to_representation(self, obj):
-        return obj.tag

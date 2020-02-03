@@ -45,11 +45,10 @@ INSTALLED_APPS = [
     'django_extensions',
     'rest_framework',
 
-    'structure.apps.articles',
+    'structure.apps.algorithms',
     'structure.apps.authentication',
     'structure.apps.core',
-    'structure.apps.profiles',
-    'structure.apps.posts',
+    'structure.apps.profiles'
 ]
 
 MIDDLEWARE = [

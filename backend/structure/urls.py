@@ -20,8 +20,7 @@ urlpatterns = [
     url('admin/', admin.site.urls),
     url('api-auth/', include('rest_framework.urls')),
 
-    url('api/', include('structure.apps.articles.urls')),
+    url('api/', include('structure.apps.algorithms.urls')),
     url('api/', include('structure.apps.authentication.urls')),
     url('api/', include('structure.apps.profiles.urls')),
-    url('api/', include('structure.apps.posts.urls')),
 ]

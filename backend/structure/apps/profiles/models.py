@@ -33,7 +33,7 @@ class Profile(TimestampedModel):
     )
 
     favorites = models.ManyToManyField(
-        'articles.Article',
+        'algorithms.Algorithm',
         related_name='favorited_by'
     )
 
@@ -57,14 +57,14 @@ class Profile(TimestampedModel):
         """Returns True if `profile` is following us; False otherwise."""
         return self.followed_by.filter(pk=profile.pk).exists()
 
-    def favorite(self, article):
-        """Favorite `article` if we haven't already favorited it."""
-        self.favorites.add(article)
+    def favorite(self, algorithm):
+        """Favorite `algorithm` if we haven't already favorited it."""
+        self.favorites.add(algorithm)
 
-    def unfavorite(self, article):
-        """Unfavorite `article` if we've already favorited it."""
-        self.favorites.remove(article)
+    def unfavorite(self, algorithm):
+        """Unfavorite `algorithm` if we've already favorited it."""
+        self.favorites.remove(algorithm)
 
-    def has_favorited(self, article):
-        """Returns True if we have favorited `article`; else False."""
-        return self.favorites.filter(pk=article.pk).exists()
+    def has_favorited(self, algorithm):
+        """Returns True if we have favorited `algorithm`; else False."""
+        return self.favorites.filter(pk=algorithm.pk).exists()

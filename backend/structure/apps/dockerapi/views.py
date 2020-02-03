@@ -16,8 +16,14 @@ class DockerAPIView(APIView):
         # The create serializer, validate serializer, save serializer pattern
         # below is common and you will see it a lot throughout this course and
         # your own work later on. Get familiar with it.
-
-        return Response({"test":"test"}, status=status.HTTP_201_CREATED)
+        image = "python:3.4-alpine"
+        code = request.data.get('code', {})
+        client = docker.from_env()
+        #client.containers.run(image, 'print("hey")' , True)
+        #container = client.containers.run(image, "python -c \"print('miau')\nfor i in range(10):\n\tprint(i)\nprint('hey')\"", auto_remove=True)
+        container = client.containers.run(image, "python -c \"" + code +"\"", auto_remove=True)
+        res = container.decode("utf-8")
+        return Response({"response":res}, status=status.HTTP_201_CREATED)
 
     def get(self, request):
 
@@ -31,4 +37,4 @@ class DockerAPIView(APIView):
         #client.containers.run(image, 'print("hey")' , True)
         container = client.containers.run(image, "python -c \"print('miau')\nfor i in range(10):\n\tprint(i)\nprint('hey')\"", auto_remove=True)
         res = container.decode("utf-8")
-        return Response({"test":res}, status=status.HTTP_201_CREATED)
+        return Response({"response":res}, status=status.HTTP_201_CREATED)

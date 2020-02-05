@@ -9,17 +9,32 @@ import { connect } from 'react-redux';
 import { history } from './helpers';
 import { alertActions, userActions } from './actions';
 import 'react-toastify/dist/ReactToastify.css';
+import AceEditor from "react-ace";
+import "ace-builds/src-noconflict/mode-jsx";
+import "ace-builds/src-noconflict/mode-python";
+import "ace-builds/src-noconflict/theme-monokai";
+import "ace-builds/src-noconflict/snippets/python";
+import "ace-builds/src-min-noconflict/ext-searchbox";
+import "ace-builds/src-min-noconflict/ext-language_tools";
 
 class App extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      code: ''
+    };
     history.listen((location, action) => {
       // clear alert on location change
       this.props.clearAlerts();
     });
   }
 
+  onChange(value) {
+    console.log(JSON.stringify(value.replace(/\"/g, "'")));
+  }
+
   render() {
+    const { code, python } = this.state;
     return (
       <div className="App">
         <Header currentUser={this.props.user}/>
@@ -27,6 +42,25 @@ class App extends Component {
           <Switch>
             <Route exact path="/">
               <h2>Home</h2>
+              <AceEditor className=" "
+                placeholder="Placeholder Text"
+                mode="python"
+                theme="monokai"
+                name="editor"
+                onLoad={this.onLoad}
+                onChange={this.onChange}
+                fontSize={14}
+                showPrintMargin={true}
+                showGutter={true}
+                highlightActiveLine={true}
+                value={``}
+                setOptions={{
+                  enableBasicAutocompletion: true,
+                  enableLiveAutocompletion: true,
+                  enableSnippets: true,
+                  showLineNumbers: true,
+                  tabSize: 2,
+                }}/>
             </Route>
             <Route exact path="/login" component={Login}></Route>
             <Route exact path="/register" component={Register}></Route>

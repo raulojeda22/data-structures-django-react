@@ -7,7 +7,7 @@ import Header from './components/Header.js';
 import { Route, Switch } from "react-router-dom";
 import { connect } from 'react-redux';
 import { history } from './helpers';
-import { alertActions } from './actions';
+import { alertActions, userActions } from './actions';
 import 'react-toastify/dist/ReactToastify.css';
 
 class App extends Component {
@@ -47,7 +47,8 @@ function mapState(state) {
 }
 
 const actionCreators = {
-  clearAlerts: alertActions.clear
+  clearAlerts: alertActions.clear,
+  logout: userActions.logout
 };
 
 const connectedApp = connect(mapState, actionCreators)(App);

@@ -20,7 +20,8 @@ function login(username, password) {
                 user => {
                     dispatch(success(user));
                     dispatch(alertActions.success("Logged In"))
-                    history.push('/');
+                    history.push('/')
+                    history.go('/');
                 },
                 error => {
                     dispatch(failure(error.toString()));

@@ -67,3 +67,19 @@ ul {
   padding-left: 15px;
   padding-right: 15px;
 }
+
+.codeEditor {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.codeEditor .output {
+  height: 500px;
+  width: 470px;
+  color: #dbc500;
+  background-color: #353535;
+  overflow-y: scroll;
+  text-align: left;
+  padding: 0 20px;
+}

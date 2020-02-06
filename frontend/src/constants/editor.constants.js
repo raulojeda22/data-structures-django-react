@@ -1,0 +1,5 @@
+export const editorConstants = {
+    EDITOR_REQUEST: 'EDITOR_REQUEST',
+    EDITOR_SUCCESS: 'EDITOR_SUCCESS',
+    EDITOR_FAILURE: 'EDITOR_FAILURE',
+};

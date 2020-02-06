@@ -8,7 +8,7 @@ class Login extends Component {
         super(props);
 
         // reset login status
-        this.props.logout();
+        //this.props.logout();
 
         this.state = {
             email: '',

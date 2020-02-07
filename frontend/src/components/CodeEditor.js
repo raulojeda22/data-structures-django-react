@@ -52,7 +52,8 @@ print(sys.version)`
                   tabSize: 2,
                 }}/>
               <form name="execute" onSubmit={this.handleSubmit}>
-                <button className="btn btn-primary">Run</button>
+                <div className="background-play"><button className="button play"></button></div>
+                {/*<button className="btn btn-primary">Run</button>*/}
               </form>
               <div className="output"><pre>{output}</pre></div>
             </div>

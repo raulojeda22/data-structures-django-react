@@ -17,6 +17,7 @@ function execute(value) {
                     dispatch(alertActions.success("Executed"))
                 },
                 error => {
+                    console.log(error);
                     dispatch(failure(error.toString()));
                     dispatch(alertActions.error(error.toString()));
                 }

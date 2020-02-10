@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { editorActions } from '../actions';
 import AceEditor from "react-ace";
@@ -13,8 +13,12 @@ class CodeEditor extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: `import sys
+            value: {
+                body: `import sys
 print(sys.version)`
+},
+            modified: false,
+            output: ''
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -25,37 +29,51 @@ print(sys.version)`
     handleSubmit(e) {
         e.preventDefault();
         const { value } = this.state;
-        this.props.execute(value.replace(/"/g, "'"));
+        this.props.execute(value.body.replace(/"/g, "'"));
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        if (!this.state.modified || nextProps.output != this.state.output) {
+            this.setState({
+                ...this.state,
+                value: nextProps.code,
+                modified: true,
+                output: nextProps.output
+            });
+        } else {
+            return false;
+        }
+        return true;
     }
     render() {
-        const { output } = this.props;
-        const { value } = this.state;
+        let { output, editating } = this.props;
+        let { value } = this.state;
+        console.log(output);
         return (
             <div className="codeEditor">
-              <AceEditor className=" "
-                placeholder="Python"
-                mode="python"
-                theme="monokai"
-                name="editor"
-                onLoad={this.onLoad}
-                onChange={this.handleChange}
-                fontSize={14}
-                showPrintMargin={true}
-                showGutter={true}
-                highlightActiveLine={true}
-                value={value}
-                setOptions={{
-                  enableBasicAutocompletion: true,
-                  enableLiveAutocompletion: true,
-                  enableSnippets: true,
-                  showLineNumbers: true,
-                  tabSize: 2,
-                }}/>
-              <form name="execute" onSubmit={this.handleSubmit}>
-                <div className="background-play"><button className="button play"></button></div>
-                {/*<button className="btn btn-primary">Run</button>*/}
-              </form>
-              <div className="output"><pre>{output}</pre></div>
+                <AceEditor className=" "
+                    placeholder="Python"
+                    mode="python"
+                    theme="monokai"
+                    name="editor"
+                    onLoad={this.onLoad}
+                    onChange={this.handleChange}
+                    fontSize={14}
+                    showPrintMargin={true}
+                    showGutter={true}
+                    highlightActiveLine={true}
+                    value={value.body}
+                    setOptions={{
+                        enableBasicAutocompletion: true,
+                        enableLiveAutocompletion: true,
+                        enableSnippets: true,
+                        showLineNumbers: true,
+                        tabSize: 2,
+                    }} />
+                <form name="execute" onSubmit={this.handleSubmit}>
+                    {!editating && <div className="background-play"><button className="button play"></button></div>}
+                    {/*<button className="btn btn-primary">Run</button>*/}
+                </form>
+                <div className="output"><pre>{output}</pre></div>
             </div>
         );
     }

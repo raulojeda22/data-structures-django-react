@@ -33,7 +33,7 @@ a {
   text-decoration: none;
 }
 
-h1 > a {
+h1>a {
   color: rgb(219, 197, 0);
 }
 
@@ -45,7 +45,6 @@ a:active {
   color: rgb(219, 197, 0);
 }
 
-
 #nav {
   display: flex;
   justify-content: space-evenly;
@@ -56,13 +55,12 @@ ul {
   list-style-type: none;
 }
 
-
 .App-header {
   font-family: boocity;
   background-color: #353535;
   display: flex;
   flex-direction: row;
-  justify-content: flex-start; 
+  justify-content: flex-start;
   color: rgb(219, 197, 0);
   padding-left: 15px;
   padding-right: 15px;
@@ -82,6 +80,7 @@ ul {
   top: 0;
   right: 50%;
 }
+
 .codeEditor .output {
   height: 500px;
   width: 50%;
@@ -106,7 +105,7 @@ ul {
 .button.play {
   border-style: solid;
   border-width: 37px;
-  border-color:transparent transparent transparent rgb(219, 197, 0);
+  border-color: transparent transparent transparent rgb(219, 197, 0);
   box-sizing: border-box;
   width: 15px;
   height: 15px;
@@ -117,9 +116,30 @@ ul {
 
 .background-play {
   display: inline-block;
-  background:transparent;
+  background: transparent;
   padding: 8px 1px 11px 16px;
   border-radius: 100%;
   text-align: center;
-  cursor: pointer;
+}
+
+.description {
+  color: lightgray;
+  font-size: smaller;
+}
+
+.description p {
+  margin-left: 15%;
+  margin-right: 15%;
+}
+
+.algoTitle {
+  color: white;
+}
+
+#root {
+  background-color: rgb(88, 88, 88);
+}
+
+#content {
+  min-height: 100vh;
 }

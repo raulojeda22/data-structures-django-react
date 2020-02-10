@@ -28,7 +28,7 @@ with open('/code/structure/secretkey.txt') as f:
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost']
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '192.168.27.35', 'codealgos.com']
 
 
 # Application definition
@@ -145,6 +145,8 @@ STATIC_URL = '/static/'
 CORS_ORIGIN_WHITELIST = (
     'http://0.0.0.0:3000',
     'http://localhost:3000',
+    'http://192.168.27.35:3000',
+    'http://codealgos.com:3000'
 )
 
 # Tell Django about the custom `User` model we created. The string

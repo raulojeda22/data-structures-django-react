@@ -32,7 +32,7 @@ print(sys.version)`
         this.props.execute(value.body.replace(/"/g, "'"));
     }
     shouldComponentUpdate(nextProps, nextState) {
-        if (!this.state.modified || nextProps.output != this.state.output) {
+        if (!this.state.modified || nextProps.output !== this.state.output) {
             this.setState({
                 ...this.state,
                 value: nextProps.code,

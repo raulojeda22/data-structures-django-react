@@ -3,9 +3,11 @@ import './App.css';
 import Login from './components/Login.js';
 import Register from './components/Register.js';
 import Algorithm from './components/Algorithm.js';
+import Profile from './components/Profile.js';
 import Nothing from './components/Nothing.js';
 import Header from './components/Header.js';
-import { Route, Switch, Link } from "react-router-dom";
+import Home from './components/Home.js';
+import { Route, Switch } from "react-router-dom";
 import { connect } from 'react-redux';
 import { history } from './helpers';
 import { alertActions, userActions, algorithmActions } from './actions';
@@ -18,7 +20,6 @@ class App extends Component {
       // clear alert on location change
       this.props.clearAlerts();
     });
-    this.props.list();
   }
 
   render() {
@@ -29,16 +30,12 @@ class App extends Component {
         <div id="content">
           <Switch>
             <Route exact path="/">
-              <h2>Home</h2>
-              <ul>
-                {this.props.codeList && this.props.codeList.map((code) => {
-                  return (<li key={code.slug}><Link to={"/algorithm/" + code.slug}>{code.title}</Link></li>)
-                })}
-              </ul>
+              <Home />
             </Route>
             <Route exact path="/login" component={Login}></Route>
             <Route exact path="/register" component={Register}></Route>
             <Route exact path="/algorithm/:name" component={Algorithm}></Route>
+            <Route exact path="/user/:username" component={Profile}></Route>
             <Route component={Nothing} />
           </Switch>
         </div>

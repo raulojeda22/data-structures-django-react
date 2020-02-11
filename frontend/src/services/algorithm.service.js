@@ -3,7 +3,8 @@ import { authHeader } from '../helpers';
 
 export const algorithmService = {
     list,
-    get
+    get,
+    listAuthor
 };
 
 function list() {
@@ -12,6 +13,14 @@ function list() {
         headers: authHeader()
     };
     return fetch(`${config.apiUrl}/algorithms`, requestOptions).then(handleList);
+}
+
+function listAuthor(author) {
+    const requestOptions = {
+        method: 'GET',
+        headers: authHeader()
+    };
+    return fetch(`${config.apiUrl}/algorithms?author=${author}`, requestOptions).then(handleList);
 }
 
 function get(name) {

@@ -15,8 +15,8 @@ export function algorithm(state = {}, action) {
         case algorithmConstants.LIST_ALGORITHM_REQUEST:
             return { ...state, getting: true};
         case algorithmConstants.LIST_ALGORITHM_SUCCESS:
+            console.log(action.value);
             return {
-                ...state,
                 getting: false,
                 codeList: action.value
             };

@@ -143,3 +143,47 @@ ul {
 #content {
   min-height: 100vh;
 }
+
+#content ul {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+}
+
+#content ul li {
+  /*flex: 30%;*/
+  border: 1px solid#dbc500;
+  background: #353535;
+  padding: 0 30px 20px 30px;
+}
+
+/*.algoInfo {
+  color: 
+  #cbc500;
+}*/
+.algoInfo {
+  display:flex;
+}
+.algoInfo .general-info p {
+  font-size: 25px;
+  font-family: boocity;
+}
+
+.general-info {
+  flex: 25%;
+}
+
+.algoInfo .description {
+  flex: 75%;
+  font-size: 15px;
+}
+
+.algoInfo .description p {
+  margin-left: 10%;
+  margin-right: 10%;
+  word-wrap: break-word;
+  overflow: hidden;
+  max-height: 4.5em;
+  line-height: 1.5em;
+  text-align:justify;
+}

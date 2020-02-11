@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import CodeEditor from './CodeEditor';
 import { algorithmActions } from '../actions';
@@ -29,7 +28,7 @@ class Algorithm extends Component {
 }
 function mapState(state) {
     const { getting, code } = state.algorithm;
-    return { code };
+    return { getting, code };
 }
 
 const actionCreators = {

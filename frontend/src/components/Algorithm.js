@@ -9,14 +9,20 @@ class Algorithm extends Component {
 
         let name = this.props.match.params.name;
         this.state = {
-            code: '',
+            code: {
+                body: `import sys
+print(sys.version)`
+            },
             name,
         };
-        this.props.get(name);
+        if (name)
+            this.props.get(name);
     }
     render() {
-        const { getting, code } = this.props;
-        console.log(code);
+        let { getting, code } = this.props;
+        if (code === undefined) {
+            code = this.state.code;
+        }
         return (
             <div className="algo">
                 <h1 className="algoTitle">{!getting && code && code.title}</h1>

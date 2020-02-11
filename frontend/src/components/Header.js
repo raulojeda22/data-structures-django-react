@@ -13,8 +13,9 @@ class Header extends React.Component {
                 </h1>
                 <ul id="nav">
                     <li><h2><Link to="/">Home</Link></h2></li>
-                    <li><h2>{this.props.currentUser.username}</h2></li>
-                    <li><button onClick={() => this.props.logout()}>Logout</button></li>
+                    <li><h2><Link to="/algorithm">Create</Link></h2></li>
+                    <li><h2><Link to={"/user/" + this.props.currentUser.username}>{this.props.currentUser.username}</Link></h2></li>
+                    <li><h2><Link to="#" onClick={() => this.props.logout()}>Logout</Link></h2></li>
                 </ul>
                 </header>
             )

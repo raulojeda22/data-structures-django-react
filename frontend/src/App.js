@@ -34,6 +34,7 @@ class App extends Component {
             </Route>
             <Route exact path="/login" component={Login}></Route>
             <Route exact path="/register" component={Register}></Route>
+            <Route exact path="/algorithm" component={Algorithm}></Route>
             <Route exact path="/algorithm/:name" component={Algorithm}></Route>
             <Route exact path="/user/:username" component={Profile}></Route>
             <Route component={Nothing} />

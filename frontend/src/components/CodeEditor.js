@@ -24,7 +24,7 @@ print(sys.version)`
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     handleChange(value) {
-        this.setState({ ...this.state, value: value });
+        this.setState({ ...this.state, value: { body: value } });
     }
     handleSubmit(e) {
         e.preventDefault();
@@ -32,13 +32,19 @@ print(sys.version)`
         this.props.execute(value.body.replace(/"/g, "'"));
     }
     shouldComponentUpdate(nextProps, nextState) {
-        if (!this.state.modified || nextProps.output !== this.state.output) {
+        if (!this.state.modified) {
             this.setState({
                 ...this.state,
                 value: nextProps.code,
-                modified: true,
+                modified: true
+            });
+        } else if (nextProps.output !== this.state.output) {
+            this.setState({
+                ...this.state,
                 output: nextProps.output
             });
+        } else if (this.props.editating !== nextProps.editating) {
+            return true;
         } else {
             return false;
         }
@@ -47,7 +53,6 @@ print(sys.version)`
     render() {
         let { output, editating } = this.props;
         let { value } = this.state;
-        console.log(output);
         return (
             <div className="codeEditor">
                 <AceEditor className=" "

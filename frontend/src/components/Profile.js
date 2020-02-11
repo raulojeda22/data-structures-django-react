@@ -7,12 +7,16 @@ class Profile extends Component {
     constructor(props) {
         super(props);
         let username = this.props.match.params.username;
+        this.state = {
+            username: username
+        }
         this.props.listAuthor(username);
     }
     render() {
         const { codeList } = this.props;
         return (
             <div className="profile">
+                <h2>{this.state.username}</h2>
                 <AlgorithmList list={codeList} />
             </div>
         );

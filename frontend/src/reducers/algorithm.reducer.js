@@ -22,6 +22,12 @@ export function algorithm(state = {}, action) {
             };
         case algorithmConstants.LIST_ALGORITHM_FAILURE:
             return state;
+        case algorithmConstants.CREATE_ALGORITHM_REQUEST:
+            return {...state, creating: true};
+        case algorithmConstants.CREATE_ALGORITHM_SUCCESS:
+            return {...state, creating: false};
+        case algorithmConstants.CREATE_ALGORITHM_FAILURE:
+            return {...state, creating: false};
       default:
         return state
     }

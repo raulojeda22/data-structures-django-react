@@ -52,3 +52,12 @@ function handleGet(response) {
         return data.algorithm;
     });
 }
+
+function create(algorithm) {
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ algorithm: algorithm })
+    };
+    return fetch(`${config.apiUrl}/algorithm`, requestOptions)
+}

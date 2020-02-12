@@ -77,3 +77,25 @@ function get(name) {
     function success(value) { return { type: algorithmConstants.GET_ALGORITHM_SUCCESS, value } }
     function failure(error) { return { type: algorithmConstants.GET_ALGORITHM_FAILURE, error } }
 }
+
+function create(algorithm) {
+    return dispatch => {
+        dispatch(request({ algorithm }));
+
+        algorithmService.create(algorithm)
+            .then(
+                value => {
+                    dispatch(success());
+                    dispatch(alertActions.success("Algorithm created"))
+                },
+                error => {
+                    dispatch(failure(error.toString()));
+                    dispatch(alertActions.error(error.toString()));
+                }
+            );
+    };
+
+    function request(value) { return { type: algorithmConstants.CREATE_ALGORITHM_REQUEST, value } }
+    function success(value) { return { type: algorithmConstants.CREATE_ALGORITHM_SUCCESS, value } }
+    function failure(error) { return { type: algorithmConstants.CREATE_ALGORITHM_FAILURE, error } }
+}

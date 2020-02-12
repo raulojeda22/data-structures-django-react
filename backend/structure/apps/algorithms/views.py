@@ -50,13 +50,11 @@ class AlgorithmViewSet(mixins.CreateModelMixin,
             'request': request
         }
         serializer_data = request.data.get('algorithm', {})
-
         serializer = self.serializer_class(
         data=serializer_data, context=serializer_context
         )
         serializer.is_valid(raise_exception=True)
         serializer.save()
-
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def list(self, request):

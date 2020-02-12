@@ -31,6 +31,9 @@ print(sys.version)`
         const { value } = this.state;
         this.props.execute(value.body.replace(/"/g, "'"));
     }
+    saveCode(e) {
+        e.preventDefault();
+    }
     shouldComponentUpdate(nextProps, nextState) {
         if (!this.state.modified) {
             this.setState({
@@ -51,41 +54,64 @@ print(sys.version)`
         return true;
     }
     render() {
-        let { output, editating } = this.props;
+        let { output, editating, user } = this.props;
         let { value } = this.state;
+        let saveForm;
+        let name;
+        if (user) {
+            if (this.state.value.title)
+                name = this.state.value.title + " " + user.username
+            saveForm = (
+                <div class="codeSave">
+                    <h3>Save your code</h3>
+                        <form name="save" onSubmit={this.saveCode}>
+                            Name <input type="text" value={name}/>
+                            Description <textarea value={this.state.value.description}></textarea>
+                            <button>Save</button>
+                        </form>
+                </div>
+            )
+        }
         return (
-            <div className="codeEditor">
-                <AceEditor className=" "
-                    placeholder="Python"
-                    mode="python"
-                    theme="monokai"
-                    name="editor"
-                    onLoad={this.onLoad}
-                    onChange={this.handleChange}
-                    fontSize={14}
-                    showPrintMargin={true}
-                    showGutter={true}
-                    highlightActiveLine={true}
-                    value={value.body}
-                    setOptions={{
-                        enableBasicAutocompletion: true,
-                        enableLiveAutocompletion: true,
-                        enableSnippets: true,
-                        showLineNumbers: true,
-                        tabSize: 2,
-                    }} />
-                <form name="execute" onSubmit={this.handleSubmit}>
-                    {!editating && <div className="background-play"><button className="button play"></button></div>}
-                    {/*<button className="btn btn-primary">Run</button>*/}
-                </form>
-                <div className="output"><pre>{output}</pre></div>
+            <div>
+                <div className="codeEditor">
+                    <AceEditor className=" "
+                        placeholder="Python"
+                        mode="python"
+                        theme="monokai"
+                        name="editor"
+                        onLoad={this.onLoad}
+                        onChange={this.handleChange}
+                        fontSize={14}
+                        showPrintMargin={true}
+                        showGutter={true}
+                        highlightActiveLine={true}
+                        value={value.body}
+                        setOptions={{
+                            enableBasicAutocompletion: true,
+                            enableLiveAutocompletion: true,
+                            enableSnippets: true,
+                            showLineNumbers: true,
+                            tabSize: 2,
+                        }} />
+                    <form name="execute" onSubmit={this.handleSubmit}>
+                        {!editating && <div className="background-play"><button className="button play"></button></div>}
+                        {/*<button className="btn btn-primary">Run</button>*/}
+                    </form>
+                    <div className="output"><pre>{output}</pre></div>
+                </div>
+                    { saveForm }
             </div>
         );
     }
 }
 function mapState(state) {
+    const { authentication } = state;
+    let user = null;
+    if (authentication.user !== undefined)
+        user = authentication.user.user;
     const { editating, output } = state.editation;
-    return { editating, output };
+    return { editating, output, user };
 }
 
 const actionCreators = {

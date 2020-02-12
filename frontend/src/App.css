@@ -192,3 +192,68 @@ ul {
   line-height: 1.5em;
   text-align:justify;
 }
+
+
+#login input, #register input {
+  border: none;
+  font-family: 'Open Sans', Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5em;
+  padding: 0;
+  -webkit-appearance: none;
+}
+
+
+#login, #register {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -182px;
+  margin-top: -182px;
+}
+
+#login form, #register form {
+  margin: auto;
+  padding: 22px 22px 22px 22px;
+  width: 320px;
+  border-radius: 5px;
+  background: #353535;
+  border-top: 3px solid #434a52;
+  border-bottom: 3px solid #434a52;
+}
+
+#login form input[type="text"], #register form input[type="text"] {
+  background-color: #585858;
+  border-radius: 0px 3px 3px 0px;
+  color: #a9a9a9;
+  margin-bottom: 1em;
+  padding: 0 16px;
+  width: 235px;
+  height: 50px;
+}
+
+#login form input[type="password"], #register form input[type="password"] {
+  background-color: #585858;
+  border-radius: 0px 3px 3px 0px;
+  color: #a9a9a9;
+  margin-bottom: 1em;
+  padding: 0 16px;
+  width: 235px;
+  height: 50px;
+}
+
+#login form button, #register form button {
+  background: #dbc500;
+  border: 0;
+  width: 270px;
+  height: 40px;
+  border-radius: 3px;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+  margin-bottom: 1em;
+}
+
+#login form button:hover, #register form button:hover {
+  background: #f0d800;
+}

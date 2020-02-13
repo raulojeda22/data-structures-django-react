@@ -4,7 +4,8 @@ import { authHeader } from '../helpers';
 export const algorithmService = {
     list,
     get,
-    listAuthor
+    listAuthor,
+    create
 };
 
 function list() {
@@ -54,10 +55,11 @@ function handleGet(response) {
 }
 
 function create(algorithm) {
+    let auth = authHeader()
     const requestOptions = {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json' , 'Authorization': auth.Authorization},
         body: JSON.stringify({ algorithm: algorithm })
     };
-    return fetch(`${config.apiUrl}/algorithm`, requestOptions)
+    return fetch(`${config.apiUrl}/algorithms/`, requestOptions)
 }

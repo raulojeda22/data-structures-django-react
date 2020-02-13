@@ -5,7 +5,8 @@ import { alertActions } from './';
 export const algorithmActions = {
     list,
     get,
-    listAuthor
+    listAuthor,
+    create,
 };
 
 function list() {

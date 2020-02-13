@@ -23,7 +23,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.props.codeList);
     return (
       <div className="App">
         <Header currentUser={this.props.user}/>

@@ -156,7 +156,7 @@ ul {
 }
 
 #content ul li {
-  /*flex: 30%;*/
+  flex: 100%;
   border: 1px solid#dbc500;
   background: #353535;
   padding: 0 30px 20px 30px;

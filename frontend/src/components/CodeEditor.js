@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { editorActions } from '../actions';
+import { editorActions, algorithmActions } from '../actions';
 import AceEditor from "react-ace";
 import "ace-builds/src-noconflict/mode-jsx";
 import "ace-builds/src-noconflict/mode-python";
@@ -18,10 +18,14 @@ class CodeEditor extends Component {
 print(sys.version)`
 },
             modified: false,
-            output: ''
+            output: '',
+            name: '',
+            description: '',
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.saveCode = this.saveCode.bind(this);
+        this.saveHandleChange = this.saveHandleChange.bind(this);
     }
     handleChange(value) {
         this.setState({ ...this.state, value: { body: value } });
@@ -32,14 +36,29 @@ print(sys.version)`
         this.props.execute(value.body.replace(/"/g, "'"));
     }
     saveCode(e) {
-        e.preventDefault();
+        e.preventDefault()
+        const {name, description} = e.target;
+        this.props.create({
+            body: this.state.value.body,
+            description: description.value,
+            title: name.value
+        })
+    }
+    saveHandleChange(e) {
+        //console.log(e.target)
+        const { name, value } = e.target;
+        this.setState({ [name]: value });
     }
     shouldComponentUpdate(nextProps, nextState) {
         if (!this.state.modified) {
+            let name;
+            if (nextProps.code.title !== undefined) { name = nextProps.code.title + " " + this.props.user.username }
             this.setState({
                 ...this.state,
                 value: nextProps.code,
-                modified: true
+                modified: true,
+                name: name,
+                description: nextProps.code.description,
             });
         } else if (nextProps.output !== this.state.output) {
             this.setState({
@@ -49,7 +68,7 @@ print(sys.version)`
         } else if (this.props.editating !== nextProps.editating) {
             return true;
         } else {
-            return false;
+            return true;
         }
         return true;
     }
@@ -57,16 +76,13 @@ print(sys.version)`
         let { output, editating, user } = this.props;
         let { value } = this.state;
         let saveForm;
-        let name;
         if (user) {
-            if (this.state.value.title)
-                name = this.state.value.title + " " + user.username
             saveForm = (
-                <div class="codeSave">
+                <div className="codeSave">
                     <h3>Save your code</h3>
                         <form name="save" onSubmit={this.saveCode}>
-                            Name <input type="text" value={name}/>
-                            Description <textarea value={this.state.value.description}></textarea>
+                            Name <input name="name" type="text" value={this.state.name} onChange={this.saveHandleChange}/>
+                            Description <textarea name="description" value={this.state.description} onChange={this.saveHandleChange}></textarea>
                             <button>Save</button>
                         </form>
                 </div>
@@ -115,7 +131,8 @@ function mapState(state) {
 }
 
 const actionCreators = {
-    execute: editorActions.execute
+    execute: editorActions.execute,
+    create: algorithmActions.create,
 };
 
 const connectedCodeEditorPage = connect(mapState, actionCreators)(CodeEditor);

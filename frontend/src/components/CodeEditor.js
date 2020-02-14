@@ -14,9 +14,8 @@ class CodeEditor extends Component {
         super(props);
         this.state = {
             value: {
-                body: `import sys
-print(sys.version)`
-},
+                body: ``
+            },
             modified: false,
             output: '',
             name: '',
@@ -52,7 +51,8 @@ print(sys.version)`
     shouldComponentUpdate(nextProps, nextState) {
         if (!this.state.modified) {
             let name;
-            if (nextProps.code.title !== undefined) { name = nextProps.code.title + " " + this.props.user.username }
+            if (nextProps.code.title !== undefined && this.props.user) { name = nextProps.code.title + " " + this.props.user.username }
+            console.log(nextProps.code)
             this.setState({
                 ...this.state,
                 value: nextProps.code,

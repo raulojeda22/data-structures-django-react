@@ -17,6 +17,8 @@ print(sys.version)`
         };
         if (name)
             this.props.get(name);
+        else
+            this.props.get("default");
     }
     render() {
         let { getting, code } = this.props;

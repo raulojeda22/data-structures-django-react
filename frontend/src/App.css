@@ -194,7 +194,7 @@ ul {
 }
 
 
-#login input, #register input {
+#login input, #register input, .codeSave input {
   border: none;
   font-family: 'Open Sans', Arial, sans-serif;
   font-size: 16px;
@@ -212,7 +212,7 @@ ul {
   margin-top: -182px;
 }
 
-#login form, #register form {
+#login form, #register form, .codeSave form {
   margin: auto;
   padding: 22px 22px 22px 22px;
   width: 320px;
@@ -222,7 +222,10 @@ ul {
   border-bottom: 3px solid #434a52;
 }
 
-#login form input[type="text"], #register form input[type="text"] {
+.codeSave form {
+  width: 500px;
+}
+#login form input[type="text"], #register form input[type="text"], .codeSave form input[type="text"], .codeSave form textarea {
   background-color: #585858;
   border-radius: 0px 3px 3px 0px;
   color: #a9a9a9;
@@ -242,7 +245,7 @@ ul {
   height: 50px;
 }
 
-#login form button, #register form button {
+#login form button, #register form button, .codeSave form button {
   background: #dbc500;
   border: 0;
   width: 270px;
@@ -254,6 +257,27 @@ ul {
   margin-bottom: 1em;
 }
 
-#login form button:hover, #register form button:hover {
+.codeSave form button {
+  width: 420px;
+}
+#login form button:hover, #register form button:hover, .codeSave form button:hover {
   background: #f0d800;
+}
+
+.codeSave form span {
+  color: 
+  #fff;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.codeSave form textarea {
+  border: none;
+  width: 380px;
+  height: 200px;
+  padding: 20px;
+}
+
+.codeSave form input {
+  width: 385px !important;
 }

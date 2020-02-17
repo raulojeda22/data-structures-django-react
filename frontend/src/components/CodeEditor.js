@@ -81,8 +81,12 @@ class CodeEditor extends Component {
                 <div className="codeSave">
                     <h3>Save your code</h3>
                         <form name="save" onSubmit={this.saveCode}>
-                            Name <input name="name" type="text" value={this.state.name} onChange={this.saveHandleChange}/>
-                            Description <textarea name="description" value={this.state.description} onChange={this.saveHandleChange}></textarea>
+                            <div className="input-container">
+                                <span>Name</span> <input name="name" type="text" value={this.state.name} onChange={this.saveHandleChange}/>
+                            </div>
+                            <div className="input-container">
+                                <span>Description</span> <textarea name="description" value={this.state.description} onChange={this.saveHandleChange}></textarea>
+                            </div>
                             <button>Save</button>
                         </form>
                 </div>

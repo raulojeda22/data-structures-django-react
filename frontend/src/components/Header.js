@@ -9,7 +9,7 @@ class Header extends React.Component {
             return (
                 <header className="App-header">
                 <h1><Link to="/">
-                    Algorithms</Link>
+                    Codealgos</Link>
                 </h1>
                 <ul id="nav">
                     <li><h2><Link to="/">Home</Link></h2></li>
@@ -24,7 +24,7 @@ class Header extends React.Component {
             return (
             <header className="App-header">
             <h1><Link to="/">
-                Algorithms</Link>
+                Codealgos</Link>
             </h1>
             <ul id="nav">
                 <li><h2><Link to="/">Home</Link></h2></li>
